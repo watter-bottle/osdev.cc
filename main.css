@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Roboto", serif;
+    color: rgb(230, 230, 230);
+    border-color: rgb(130, 130, 130);
+    background-color: rgb(22, 22, 22);
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#cbf {
+    grid-column: 1;
+}
+
+#hex {
+    grid-column: 2;
+}
+
+#links {
+    grid-column: 3;
+    padding: 10px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}

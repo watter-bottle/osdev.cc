@@ -1,0 +1,98 @@
+[
+    {
+        "name": "x86_64 - PF Error Code",
+        "data": [
+            { "length": 1, "label": "Present" },
+            { "length": 1, "label": "Write" },
+            { "length": 1, "label": "User" },
+            { "length": 1, "label": "Reserved Write" },
+            { "length": 1, "label": "Instruction Fetch" },
+            { "length": 1, "label": "Protection Key" },
+            { "length": 1, "label": "Shadow Stack" },
+            { "length": 1, "label": "Software Guard Extensions" }        
+        ]
+    }, 
+    {
+        "name": "x86_64 - GPF Error Code",
+        "data": [
+            { "length": 1, "label": "External" },
+            { "length": 2, "label": "Table" },
+            { "length": 13, "label": "Selector Index" }
+        ]
+    },
+    {
+        "name": "x86_64 - RFlags",
+        "data": [
+            { "length": 1, "label": "Carry Flag" },
+            { "length": 1, "label": "Reserved (Ought to be set)" },
+            { "length": 1, "label": "Parity Flag" },
+            { "length": 1, "label": "Reserved" },
+            { "length": 1, "label": "Auxiliary Carry Flag" },
+            { "length": 1, "label": "Reserved" },
+            { "length": 1, "label": "Zero Flag" },
+            { "length": 1, "label": "Sign Flag" },
+            { "length": 1, "label": "Trap Flag" },
+            { "length": 1, "label": "Interrupt Enable Flag" },
+            { "length": 1, "label": "Direction Flag" },
+            { "length": 1, "label": "Overflow Flag" },
+            { "length": 2, "label": "I/O Privilege Level" },
+            { "length": 1, "label": "Nested Task" },
+            { "length": 1, "label": "Reserved" },
+            { "length": 1, "label": "Resume Flag" },
+            { "length": 1, "label": "Virtual-8086 Mode" },
+            { "length": 1, "label": "Alignment Check / Access Control" },
+            { "length": 1, "label": "Virtual Interrupt Flag" },
+            { "length": 1, "label": "Virtual Interrupt Pending" },
+            { "length": 1, "label": "ID Flag" }
+        ]
+    },
+    {
+        "name": "x86_64 - DR6",
+        "data": [
+            { "length": 4, "label": "Breakpoint Condition Detected" },
+            { "position": 11, "length": 1, "label": "Bus-Lock Detected" },
+            { "position": 13, "length": 1, "label": "Debug Register Access Detected" },
+            { "length": 1, "label": "Single Step" },
+            { "length": 1, "label": "Task Switch" },
+            { "length": 1, "label": "Restricted Transactional Memory" }
+        ]
+    },
+    {
+        "name": "x86_64 - DR7",
+        "data": [
+            { "length": 1, "label": "Local Breakpoint Enable 0" },
+            { "length": 1, "label": "Global Breakpoint Enable 0" },
+            { "length": 1, "label": "Local Breakpoint Enable 1" },
+            { "length": 1, "label": "Global Breakpoint Enable 1" },
+            { "length": 1, "label": "Local Breakpoint Enable 2" },
+            { "length": 1, "label": "Global Breakpoint Enable 2" },
+            { "length": 1, "label": "Local Breakpoint Enable 3" },
+            { "length": 1, "label": "Global Breakpoint Enable 3" },
+            { "length": 2, "label": "Local & Global Exact Breakpoint Enable" },
+            { "position": 11, "length": 1, "label": "Restricted Transactional Memory" },
+            { "position": 13, "length": 1, "label": "General Detect Enable" },
+            { "position": 16, "length": 2, "label": "Breakpoint 0 Conditions" },
+            { "position": 18, "length": 2, "label": "Breakpoint 0 Size" },
+            { "position": 20, "length": 2, "label": "Breakpoint 1 Conditions" },
+            { "position": 22, "length": 2, "label": "Breakpoint 1 Size" },
+            { "position": 24, "length": 2, "label": "Breakpoint 2 Conditions" },
+            { "position": 26, "length": 2, "label": "Breakpoint 2 Size" },
+            { "position": 28, "length": 2, "label": "Breakpoint 3 Conditions" },
+            { "position": 30, "length": 2, "label": "Breakpoint 3 Size" }
+        ]
+    },
+    {
+        "name": "IOApic REDTBL Entry",
+        "data": [
+            { "length": 8, "label": "Interrupt Vector" },
+            { "length": 3, "label": "Delivery Mode" },
+            { "length": 1, "label": "Destination Mode" },
+            { "length": 1, "label": "Delivery Status" },
+            { "length": 1, "label": "Interrupt Input Pin Polarity" },
+            { "length": 1, "label": "Remote IRR" },
+            { "length": 1, "label": "Trigger Mode" },
+            { "length": 1, "label": "Interrupt Mask" },
+            { "position": 56, "length": 8, "label": "Destination Field" }
+        ]
+    }
+]

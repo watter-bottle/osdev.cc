@@ -1,0 +1,82 @@
+#hex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+}
+
+#hex input {
+    width: 100%;
+    padding: 6px;
+    border-width: 2px;
+    border-radius: 4px;
+    outline-style: none;
+}
+
+#hex > div {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-items: stretch;
+    gap: 10px;
+}
+
+#hex > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    background-color: transparent;
+    user-select: none;
+    cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+#hex > div > div.active {
+    background-color: #00ffdd69;
+}
+
+#cbf {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#cbf table {
+    width: fit-content;
+}
+
+#cbf table, #cbf table th, #cbf table tr {
+    border-style: solid;
+    border-width: 1px;
+    border-collapse: collapse;
+}
+
+#cbf table thead td {
+    column-span: all;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(35, 35, 35);
+}
+
+#cbf table tr.active td {
+    background-color: #00ffdd69;
+}
+
+#cbf table td, #cbf table th {
+    padding: 2px 4px;
+}
+
+#cbf > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: fit-content;
+}
+
+#cbf > div button {
+    padding: 4px;
+    border-width: 2px;
+    border-radius: 4px;
+}
