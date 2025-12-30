@@ -367,7 +367,11 @@ const updateCbf = () => {
             dataRow.length === 1 ? `${startBit}` : `${startBit}..${endBit}`;
         const valueCell = row.insertCell();
         valueCell.classList.add("cbf-value");
-        valueCell.innerText = value.toString(16);
+        if (dataRow.match != undefined) {
+			valueCell.innerText = `${	dataRow.match[value]} (${value.toString(16)})`;
+		} else {
+			valueCell.innerText = value.toString(16);
+		}
     }
 };
 

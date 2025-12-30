@@ -16,7 +16,7 @@
         "name": "x86_64 - GPF Error Code",
         "data": [
             { "length": 1, "label": "External" },
-            { "length": 2, "label": "Table" },
+            { "length": 2, "label": "Table", "match": ["GDT", "IDT", "LDT", "IDT"] },
             { "length": 13, "label": "Selector Index" }
         ]
     },
@@ -93,6 +93,29 @@
             { "length": 1, "label": "Trigger Mode" },
             { "length": 1, "label": "Interrupt Mask" },
             { "position": 56, "length": 8, "label": "Destination Field" }
+        ]
+    },
+    {
+        "name": "Virtual Addresses (4-level)",
+        "data": [
+            { "length": 12, "label": "Page Offset" },
+            { "length": 9, "label": "PT Index" },
+            { "length": 9, "label": "PD Index" },
+            { "length": 9, "label": "PDPT Index" },
+            { "length": 9, "label": "PML4 Index" },
+            { "length": 16, "label": "Sign Extension" }
+        ]
+    },
+    {
+        "name": "Virtual Addresses (5-level)",
+        "data": [
+            { "length": 12, "label": "Page Offset" },
+            { "length": 9, "label": "PT Index" },
+            { "length": 9, "label": "PD Index" },
+            { "length": 9, "label": "PDPT Index" },
+            { "length": 9, "label": "PML4 Index" },
+            { "length": 9, "label": "PML5 Index" },
+            { "length": 7, "label": "Sign Extension" }
         ]
     }
 ]
