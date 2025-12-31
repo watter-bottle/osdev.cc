@@ -368,9 +368,9 @@ const updateCbf = () => {
         const valueCell = row.insertCell();
         valueCell.classList.add("cbf-value");
 
-        let valueString = value.toString(16);
-        if(dataRow.as !== undefined) {
-            switch(dataRow.as) {
+        let valueString = `0x${value.toString(16)}`;
+        if (dataRow.as !== undefined) {
+            switch (dataRow.as) {
                 case "decimal":
                     valueString = value.toString(10);
                     break;
@@ -383,10 +383,10 @@ const updateCbf = () => {
         }
 
         if (dataRow.match !== undefined) {
-			valueCell.innerText = `${dataRow.match[value]} (${valueString})`;
-		} else {
-			valueCell.innerText = valueString;
-		}
+            valueCell.innerText = `${dataRow.match[value]} (${valueString})`;
+        } else {
+            valueCell.innerText = valueString;
+        }
     }
 };
 
