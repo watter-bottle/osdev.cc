@@ -3,47 +3,35 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>OSDev Toolkit</title>
-        <link rel="stylesheet" href="main.css" />
-        <link rel="stylesheet" href="calc.css" />
+
+        <title>OSDev Toolkit - Calculator</title>
+
+        <link rel="stylesheet" href="css/calc/main.css" />
+
+        <script defer src="js/links.js"></script>
+        <script defer src="js/calc/calc.js"></script>
+        <script defer src="js/calc/decoder.js"></script>
     </head>
+
     <body>
-        <div id="layout">
-            <div id="cbf"></div>
-            <div id="calc"></div>
-            <div id="rail">
-                <div id="links">
-                    <div id="links-title">Quick Links</div>
-                    <a
-                        href="https://osdev.wiki"
-                        target="_blank"
-                        rel="noreferrer"
-                        >osdev.wiki</a
-                    >
-                    <a
-                        href="https://cdrdv2.intel.com/v1/dl/getContent/671447"
-                        target="_blank"
-                        rel="noreferrer"
-                        >x86 Intel SDM</a
-                    >
-                    <a
-                        href="https://www.felixcloutier.com/x86/"
-                        target="_blank"
-                        rel="noreferrer"
-                        >x86 instruction reference</a
-                    >
-                    <a
-                        href="/qemu-analyzer.html"
-                        target="_blank"
-                        rel="noreferrer"
-                        >QEMU Log Analyzer</a
-                    >
+        <div class="layout">
+            <div class="section-header">
+                <div class="page-header">
+                    <h1>OSDev Calculator</h1>
+                    <p>
+                        Decimal/Hexadecimal/Binary calculator & decoders for
+                        osdev related structures
+                    </p>
                 </div>
-                <div id="cbf-selectors"></div>
+            </div>
+            <div id="decoder"></div>
+            <div id="calc"></div>
+            <div class="links" id="links-tools">
+                <h2>Tools</h2>
+            </div>
+            <div class="links" id="links-quick">
+                <h2>Quick Links</h2>
             </div>
         </div>
-
-        <script src="calc.js"></script>
-        <script src="qemu.js"></script>
     </body>
 </html>

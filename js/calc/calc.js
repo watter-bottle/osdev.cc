@@ -1,5 +1,4 @@
 const main = document.getElementById("calc");
-
 const decimal = document.createElement("input");
 const hex = document.createElement("input");
 const binary = document.createElement("div");
@@ -10,16 +9,10 @@ for (let i = 0; i < 64; i++) {
     binaryElements.push(e);
     binary.appendChild(e);
 }
-const cbfTable = document.createElement("table");
-const cbfSelectors = document.createElement("div");
-cbfSelectors.classList.add("cbf-selectors");
-const cbfSelectorButtons = [];
 
 const max = BigInt("0xFFFFFFFFFFFFFFFF");
 
-/* Custom Bitfields */
-let cbfSelected = -1;
-let cbf = [];
+let currentValue = 0n;
 
 /* Calculator */
 const operatorPrecedence = {
@@ -307,94 +300,6 @@ const evaluateExpression = (input, baseMode) => {
     return { ok: true, value: clampValue(value) };
 };
 
-/* Update */
-let currentValue = 0n;
-const updateCbf = () => {
-    cbfTable.innerHTML = "";
-    if (cbfSelected < 0) return;
-
-    cbfSelectorButtons.forEach((button, index) => {
-        button.classList.toggle("active", index === cbfSelected);
-    });
-
-    const caption = cbfTable.createCaption();
-    caption.textContent = cbf[cbfSelected].name;
-
-    const thead = cbfTable.createTHead();
-    const tr = thead.insertRow();
-    const thField = tr.insertCell();
-    const thBits = tr.insertCell();
-    const thValue = tr.insertCell();
-    thField.textContent = "Field";
-    thBits.textContent = "Bits";
-    thValue.textContent = "Value";
-
-    const tbody = cbfTable.createTBody();
-
-    let i = 0;
-    for (const dataRow of cbf[cbfSelected].data) {
-        if (dataRow.position !== undefined) {
-            if (i > dataRow.position) {
-                console.error("cbf malformed");
-                continue;
-            }
-            i = dataRow.position;
-        }
-
-        const makeMask = (length) => {
-            let mask = 0n;
-            for (let i = 0; i < length; i++) mask += 1n << BigInt(i);
-            return mask;
-        };
-        const startBit = i;
-        const value =
-            (currentValue >> BigInt(startBit)) & makeMask(dataRow.length);
-        i += dataRow.length;
-
-        const row = tbody.insertRow();
-        row.setAttribute(
-            "title",
-            `bit: ${startBit}, length: ${dataRow.length}`,
-        );
-        if (value > 0) row.classList.add("active");
-
-        const labelCell = row.insertCell();
-        labelCell.innerText = dataRow.label;
-        const bitCell = row.insertCell();
-        const endBit = startBit + dataRow.length - 1;
-        bitCell.classList.add("cbf-bits");
-        bitCell.innerText =
-            dataRow.length === 1 ? `${startBit}` : `${startBit}..${endBit}`;
-        const valueCell = row.insertCell();
-        valueCell.classList.add("cbf-value");
-
-        let valueString;
-        if (dataRow.as === undefined) {
-            dataRow.as = "decimal";
-        }
-
-        switch (dataRow.as) {
-            case "hex":
-                valueString = `0x${value.toString(16)}`;
-                break;
-            case "decimal":
-                valueString = value.toString(10);
-                break;
-            case "boolean":
-                valueString = value === 0n ? "false" : "true";
-                break;
-            default:
-                break;
-        }
-
-        if (dataRow.match !== undefined) {
-            valueCell.innerText = `${dataRow.match[value]} (${valueString})`;
-        } else {
-            valueCell.innerText = valueString;
-        }
-    }
-};
-
 const updateBinary = () => {
     for (let i = 0; i < 64; i++) {
         const elem = binaryElements[64 - 1 - i];
@@ -415,7 +320,7 @@ const setCurrentValue = (value, options = {}) => {
     if (source !== hex) hex.value = currentValue.toString(16);
 
     updateBinary();
-    updateCbf();
+    updateDecoder();
 };
 
 const handleInput = (input, baseMode) => {
@@ -479,33 +384,3 @@ labelBinary.textContent = "Binary";
 main.appendChild(labelBinary);
 
 main.appendChild(binary);
-
-/* CBF Table */
-updateCbf();
-
-const cbfMain = document.getElementById("cbf");
-cbfMain.appendChild(cbfTable);
-
-const cbfButtons = document.getElementById("cbf-selectors");
-cbfButtons.appendChild(cbfSelectors);
-
-/* Load CBF */
-fetch("/cbf.json")
-    .then((res) => res.json())
-    .then((data) => {
-        cbf = data;
-        if (cbf.length > 0) {
-            cbfSelected = 0;
-        }
-        for (let i = 0; i < cbf.length; i++) {
-            const selectButton = document.createElement("button");
-            selectButton.onclick = () => {
-                cbfSelected = i;
-                updateCbf();
-            };
-            selectButton.textContent = cbf[i].name;
-            cbfSelectorButtons.push(selectButton);
-            cbfSelectors.appendChild(selectButton);
-        }
-        updateCbf();
-    });

@@ -1,0 +1,107 @@
+#decoder {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#decoder table {
+    width: 100%;
+    border-radius: 0;
+    overflow: visible;
+    border: none;
+    background: transparent;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#decoder table caption {
+    caption-side: top;
+    text-align: center;
+    padding: 0 0 6px;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+}
+
+#decoder table thead td {
+    column-span: all;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    background: transparent;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+}
+
+#decoder table tr.active td {
+    background: rgba(78, 208, 179, 0.15);
+}
+
+#decoder table td,
+#decoder table th {
+    padding: 6px 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(233, 238, 244, 0.08);
+}
+
+#decoder table tbody tr:hover td {
+    background: rgba(100, 185, 255, 0.08);
+}
+
+#decoder table td.value {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+#decoder table td.bits {
+    color: var(--color-text-secondary);
+    font-size: 0.78rem;
+}
+
+/* Selector */
+.decoder-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.decoder-selector label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
+.decoder-selector select {
+    width: 100%;
+    padding: 10px 44px 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(233, 238, 244, 0.18);
+    background-color: rgba(8, 12, 18, 0.7);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    appearance: none;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a5bfd5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-position: calc(100% - 18px) 50%;
+    background-size: 10px 6px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.decoder-selector select:hover {
+    border-color: rgba(78, 208, 179, 0.7);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+.decoder-selector select:focus {
+    outline: none;
+}

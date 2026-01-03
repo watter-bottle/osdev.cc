@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@300..600&display=swap");
+
+@import "reset.css";
+@import "layout.css";
+@import "header.css";
+@import "links.css";
+
+/* Base */
+:root {
+    color-scheme: dark;
+    --color-text: #e9eef4;
+    --color-text-secondary: #a9b4c2;
+}
+
+* {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    color: var(--color-text);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: clamp(22px, 3.5vw, 48px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background:
+        radial-gradient(
+            1200px 700px at 10% -10%,
+            rgba(78, 208, 179, 0.16),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 600px at 90% 10%,
+            rgba(100, 185, 255, 0.18),
+            transparent 55%
+        ),
+        linear-gradient(140deg, #0b0f14, #0f1621);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+    );
+    background-size: 22px 22px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Transitions */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,20 @@
+.section-header {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #4ed0b3, #64b9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.page-header p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}

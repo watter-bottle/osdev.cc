@@ -1,0 +1,68 @@
+.layout {
+    width: min(1200px, 100%);
+    display: grid;
+    grid-template-columns: 4fr 4fr 3fr;
+    gap: 1rem;
+    align-items: space-between;
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Default styles for layout elements */
+.layout > div {
+    padding: 20px 22px;
+    border-radius: 18px;
+    background: rgba(18, 26, 36, 0.75);
+    border: 1px solid rgba(233, 238, 244, 0.12);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    animation: rise 700ms ease-out both;
+}
+
+.layout > div > h2 {
+    font-size: 0.85rem;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.2rem;
+}
+
+/* Stagger div loads */
+.layout > div:nth-child(2) {
+    animation-delay: 50ms;
+}
+
+.layout > div:nth-child(3) {
+    animation-delay: 100ms;
+}
+
+.layout > div:nth-child(4) {
+    animation-delay: 150ms;
+}
+
+.layout > div:nth-child(5) {
+    animation-delay: 200ms;
+}
+
+.layout > div:nth-child(6) {
+    animation-delay: 250ms;
+}
+
+.layout > div:nth-child(7) {
+    animation-delay: 300ms;
+}
+
+.layout > div:nth-child(8) {
+    animation-delay: 350ms;
+}

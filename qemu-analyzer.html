@@ -1,89 +1,86 @@
 <!doctype html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>QEMU Log Analyzer - OSDev Toolkit</title>
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="qemu-analyzer.css" />
-</head>
+        <title>OSDev Toolkit - Qemu Analyzer</title>
 
-<body>
-    <div id="layout">
-        <div id="header-section">
-            <div id="page-header">
-                <h1>QEMU Log Analyzer</h1>
-                <p>Upload and analyze QEMU execution logs to identify exceptions and system state</p>
+        <link rel="stylesheet" href="css/qemu-analyzer.css" />
+
+        <script defer src="js/links.js"></script>
+        <script defer src="js/qemu-analyzer.js"></script>
+    </head>
+
+    <body>
+        <div class="layout">
+            <div class="section-header">
+                <div class="page-header">
+                    <h1>QEMU Log Analyzer</h1>
+                    <p>
+                        Upload and analyze QEMU execution logs to identify
+                        exceptions
+                    </p>
+                    <p>
+                        Run QEMU with the following flags:
+                        <span>-D ./log.txt -d int,cpu_reset</span>
+                    </p>
+                </div>
             </div>
-            <div id="upload-section">
+
+            <div class="section-upload">
                 <input type="file" id="file-input" accept=".txt,.log" />
                 <label for="file-input" class="file-label">
                     <span class="file-icon">📁</span>
                     <span class="file-text">Choose QEMU log file</span>
                 </label>
-                <button id="load-sample" class="secondary-btn">Load Sample Log</button>
+                <button id="load-sample">Load Sample Log</button>
             </div>
-        </div>
 
-        <div id="summary-section">
-            <div class="summary-card" id="total-events">
-                <div class="summary-value">0</div>
-                <div class="summary-label">Total Events</div>
-            </div>
-            <div class="summary-card" id="exceptions-count">
-                <div class="summary-value">0</div>
-                <div class="summary-label">Exceptions</div>
-            </div>
-            <div class="summary-card" id="cpu-resets-count">
-                <div class="summary-value">0</div>
-                <div class="summary-label">CPU Resets</div>
-            </div>
-        </div>
-
-        <div id="events-section">
-            <div class="section-header">
-                <h2>Exception Events</h2>
-                <div class="filter-controls">
-                    <select id="event-filter">
-                        <option value="all">All Events</option>
-                        <option value="exception">Exceptions Only</option>
-                        <option value="cpu_reset">CPU Resets Only</option>
-                    </select>
+            <div class="section-summary">
+                <div class="summary-card" id="total-events">
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Total Events</div>
+                </div>
+                <div class="summary-card" id="exceptions-count">
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Exceptions</div>
+                </div>
+                <div class="summary-card" id="cpu-resets-count">
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">CPU Resets</div>
                 </div>
             </div>
-            <div id="events-list"></div>
-        </div>
 
-        <div id="details-section">
-            <div class="section-header">
-                <h2>Event Details</h2>
+            <div class="links" id="links-tools">
+                <h2>Tools</h2>
             </div>
-            <div id="event-details">
-                <div class="empty-state">
-                    <span class="empty-icon">🔍</span>
-                    <p>Select an event to view details</p>
+
+            <div id="events-section">
+                <div class="section-header">
+                    <h2>Exception Events</h2>
+                    <div class="filter-controls">
+                        <select id="event-filter">
+                            <option value="all">All Events</option>
+                            <option value="exception">Exceptions Only</option>
+                            <option value="cpu_reset">CPU Resets Only</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="events-list"></div>
+            </div>
+
+            <div id="details-section">
+                <div class="section-header">
+                    <h2>Event Details</h2>
+                </div>
+                <div id="event-details">
+                    <div class="empty-state">
+                        <span class="empty-icon">🔍</span>
+                        <p>Select an event to view details</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div id="rail">
-            <div id="links">
-                <div id="links-title">Quick Links</div>
-                <a href="index.html">← Back to Toolkit</a>
-                <a href="https://osdev.wiki" target="_blank" rel="noreferrer">osdev.wiki</a>
-                <a href="https://wiki.osdev.org/Exceptions" target="_blank" rel="noreferrer">x86 Exceptions</a>
-                <a href="https://www.felixcloutier.com/x86/" target="_blank" rel="noreferrer">x86 instruction
-                    reference</a>
-            </div>
-            <div id="diagnostics">
-                <div id="links-title">Diagnostics</div>
-                <div id="diagnostics-content"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="qemu-analyzer.js"></script>
-</body>
-
+    </body>
 </html>

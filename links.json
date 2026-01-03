@@ -1,0 +1,26 @@
+{
+    "tools": [
+        {
+            "name": "OSDev Calculator",
+            "url": "/"
+        },
+        {
+            "name": "Qemu Analyzer",
+            "url": "/qemu-analyzer.html"
+        }
+    ],
+    "quick": [
+        {
+            "name": "osdev.wiki",
+            "url": "https://osdev.wiki"
+        },
+        {
+            "name": "x86 Intel SDM",
+            "url": "https://cdrdv2.intel.com/v1/dl/getContent/671447"
+        },
+        {
+            "name": "x86 instruction reference",
+            "url": "https://www.felixcloutier.com/x86/"
+        }
+    ]
+}
