@@ -623,7 +623,7 @@ function renderExceptionDetails(event) {
     }
 
     const errorCodeDisplay = decoderParam
-        ? `<a href="index.html?${decoderParam}&value=0x${event.error_code}" class="error-code-link">0x${event.error_code}</a>`
+        ? `<a href="/?${decoderParam}&value=0x${event.error_code}" target="_blank" class="error-code-link">0x${event.error_code}</a>`
         : `0x${event.error_code}`;
 
     let html = `
