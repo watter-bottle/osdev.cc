@@ -9,6 +9,9 @@ for (let i = 0; i < 64; i++) {
     binaryElements.push(e);
     binary.appendChild(e);
 }
+const queryValueParam = new URLSearchParams(window.location.search).get(
+    "value",
+);
 
 const max = BigInt("0xFFFFFFFFFFFFFFFF");
 
@@ -384,3 +387,22 @@ labelBinary.textContent = "Binary";
 main.appendChild(labelBinary);
 
 main.appendChild(binary);
+
+const applyInitialValueFromQuery = () => {
+    if (!queryValueParam) return;
+    const trimmed = queryValueParam.trim();
+    if (trimmed === "") return;
+
+    try {
+        currentValue = clampValue(BigInt(trimmed));
+    } catch (error) {
+        console.warn("Ignoring invalid value query parameter", error);
+        return;
+    }
+
+    decimal.value = currentValue.toString(10);
+    hex.value = currentValue.toString(16);
+    updateBinary();
+};
+
+applyInitialValueFromQuery();

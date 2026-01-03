@@ -1,5 +1,6 @@
 [
     {
+        "id": "pf",
         "name": "x86_64 - PF Error Code",
         "data": [
             { "length": 1, "label": "Present", "as": "boolean" },
@@ -9,22 +10,36 @@
             { "length": 1, "label": "Instruction Fetch", "as": "boolean" },
             { "length": 1, "label": "Protection Key", "as": "boolean" },
             { "length": 1, "label": "Shadow Stack", "as": "boolean" },
-            { "length": 1, "label": "Software Guard Extensions", "as": "boolean" }        
+            {
+                "length": 1,
+                "label": "Software Guard Extensions",
+                "as": "boolean"
+            }
         ]
-    }, 
+    },
     {
+        "id": "gp",
         "name": "x86_64 - GPF Error Code",
         "data": [
             { "length": 1, "label": "External", "as": "boolean" },
-            { "length": 2, "label": "Table", "match": ["GDT", "IDT", "LDT", "IDT"] },
+            {
+                "length": 2,
+                "label": "Table",
+                "match": ["GDT", "IDT", "LDT", "IDT"]
+            },
             { "length": 13, "label": "Selector Index", "as": "hex" }
         ]
     },
     {
+        "id": "rflags",
         "name": "x86_64 - RFlags",
         "data": [
             { "length": 1, "label": "Carry Flag", "as": "boolean" },
-            { "length": 1, "label": "Reserved (Ought to be set)", "as": "boolean" },
+            {
+                "length": 1,
+                "label": "Reserved (Ought to be set)",
+                "as": "boolean"
+            },
             { "length": 1, "label": "Parity Flag", "as": "boolean" },
             { "length": 1, "label": "Reserved", "as": "boolean" },
             { "length": 1, "label": "Auxiliary Carry Flag", "as": "boolean" },
@@ -40,37 +55,93 @@
             { "length": 1, "label": "Reserved", "as": "boolean" },
             { "length": 1, "label": "Resume Flag", "as": "boolean" },
             { "length": 1, "label": "Virtual-8086 Mode", "as": "boolean" },
-            { "length": 1, "label": "Alignment Check / Access Control", "as": "boolean" },
+            {
+                "length": 1,
+                "label": "Alignment Check / Access Control",
+                "as": "boolean"
+            },
             { "length": 1, "label": "Virtual Interrupt Flag", "as": "boolean" },
-            { "length": 1, "label": "Virtual Interrupt Pending", "as": "boolean" },
+            {
+                "length": 1,
+                "label": "Virtual Interrupt Pending",
+                "as": "boolean"
+            },
             { "length": 1, "label": "ID Flag", "as": "boolean" }
         ]
     },
     {
+        "id": "dr6",
         "name": "x86_64 - DR6",
         "data": [
             { "length": 4, "label": "Breakpoint Condition Detected" },
             { "position": 11, "length": 1, "label": "Bus-Lock Detected" },
-            { "position": 13, "length": 1, "label": "Debug Register Access Detected" },
+            {
+                "position": 13,
+                "length": 1,
+                "label": "Debug Register Access Detected"
+            },
             { "length": 1, "label": "Single Step" },
             { "length": 1, "label": "Task Switch" },
             { "length": 1, "label": "Restricted Transactional Memory" }
         ]
     },
     {
+        "id": "dr7",
         "name": "x86_64 - DR7",
         "data": [
-            { "length": 1, "label": "Local Breakpoint Enable 0", "as": "boolean" },
-            { "length": 1, "label": "Global Breakpoint Enable 0", "as": "boolean" },
-            { "length": 1, "label": "Local Breakpoint Enable 1", "as": "boolean" },
-            { "length": 1, "label": "Global Breakpoint Enable 1", "as": "boolean" },
-            { "length": 1, "label": "Local Breakpoint Enable 2", "as": "boolean" },
-            { "length": 1, "label": "Global Breakpoint Enable 2", "as": "boolean" },
-            { "length": 1, "label": "Local Breakpoint Enable 3", "as": "boolean" },
-            { "length": 1, "label": "Global Breakpoint Enable 3", "as": "boolean" },
+            {
+                "length": 1,
+                "label": "Local Breakpoint Enable 0",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Global Breakpoint Enable 0",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Local Breakpoint Enable 1",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Global Breakpoint Enable 1",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Local Breakpoint Enable 2",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Global Breakpoint Enable 2",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Local Breakpoint Enable 3",
+                "as": "boolean"
+            },
+            {
+                "length": 1,
+                "label": "Global Breakpoint Enable 3",
+                "as": "boolean"
+            },
             { "length": 2, "label": "Local & Global Exact Breakpoint Enable" },
-            { "position": 11, "length": 1, "label": "Restricted Transactional Memory", "as": "boolean" },
-            { "position": 13, "length": 1, "label": "General Detect Enable", "as": "boolean" },
+            {
+                "position": 11,
+                "length": 1,
+                "label": "Restricted Transactional Memory",
+                "as": "boolean"
+            },
+            {
+                "position": 13,
+                "length": 1,
+                "label": "General Detect Enable",
+                "as": "boolean"
+            },
             { "position": 16, "length": 2, "label": "Breakpoint 0 Conditions" },
             { "position": 18, "length": 2, "label": "Breakpoint 0 Size" },
             { "position": 20, "length": 2, "label": "Breakpoint 1 Conditions" },
@@ -82,6 +153,7 @@
         ]
     },
     {
+        "id": "ioapic-redtbl-entry",
         "name": "IOApic REDTBL Entry",
         "data": [
             { "length": 8, "label": "Interrupt Vector" },
@@ -96,6 +168,7 @@
         ]
     },
     {
+        "id": "virt-addr-4lvl",
         "name": "Virtual Addresses (4-level)",
         "data": [
             { "length": 12, "label": "Page Offset", "as": "decimal" },
@@ -107,6 +180,7 @@
         ]
     },
     {
+        "id": "virt-addr-5lvl",
         "name": "Virtual Addresses (5-level)",
         "data": [
             { "length": 12, "label": "Page Offset", "as": "decimal" },

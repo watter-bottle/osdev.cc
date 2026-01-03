@@ -2,12 +2,30 @@ const DECODER_STORAGE_KEY = "osdev.selectedDecoder";
 let selectedDecoder = -1;
 let decoders = [];
 
+const queryDecoderParam = new URLSearchParams(window.location.search).get(
+    "decoder",
+);
+
+const normalizeDecoderKey = (value) => {
+    if (typeof value !== "string") return "";
+    return value.trim().toLowerCase();
+};
+
+const findDecoderIndexByKey = (value) => {
+    const normalized = normalizeDecoderKey(value);
+    if (!normalized) return -1;
+    return decoders.findIndex((decoder) => {
+        if (!decoder) return false;
+        return normalizeDecoderKey(decoder.id) === normalized;
+    });
+};
+
 const persistSelectedDecoder = () => {
     if (selectedDecoder < 0 || !decoders[selectedDecoder]) {
         localStorage.removeItem(DECODER_STORAGE_KEY);
         return;
     }
-    localStorage.setItem(DECODER_STORAGE_KEY, decoders[selectedDecoder].name);
+    localStorage.setItem(DECODER_STORAGE_KEY, decoders[selectedDecoder].id);
 };
 
 const decoderMain = document.getElementById("decoder");
@@ -132,11 +150,15 @@ fetch("/decoder-entries.json")
             decoderSelector.appendChild(option);
         }
         if (decoders.length > 0) {
-            const storedName = localStorage.getItem(DECODER_STORAGE_KEY);
-            const storedIndex = storedName
-                ? decoders.findIndex((decoder) => decoder.name === storedName)
-                : -1;
+            const storedKey = localStorage.getItem(DECODER_STORAGE_KEY);
+            const storedIndex = findDecoderIndexByKey(storedKey);
             selectedDecoder = storedIndex >= 0 ? storedIndex : 0;
+
+            const queryIndex = findDecoderIndexByKey(queryDecoderParam);
+            if (queryIndex >= 0) {
+                selectedDecoder = queryIndex;
+            }
+
             decoderSelector.disabled = false;
         } else {
             selectedDecoder = -1;
