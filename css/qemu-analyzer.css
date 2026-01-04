@@ -175,6 +175,12 @@
     border: 1px solid rgba(100, 185, 255, 0.3);
 }
 
+.event-type.triple_fault {
+    background: rgba(100, 219, 255, 0.2);
+    color: #64dbff;
+    border: 1px solid rgba(100, 219, 255, 0.3);
+}
+
 .event-info {
     font-family: "IBM Plex Mono", monospace;
     font-size: 0.85rem;

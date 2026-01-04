@@ -33,6 +33,15 @@ function parse_qemu_log(log) {
             }
         }
 
+        if (line.startsWith("Triple fault")) {
+            const event = {
+                type: "triple_fault"
+            };
+            log_events.push(event);
+            i++;
+            break;
+        }
+
         if (line.startsWith("check_exception")) {
             const excMatch = line.match(
                 /check_exception old:\s*(0x[0-9a-fA-F]+)\s+new\s+(0x[0-9a-fA-F]+)/,
@@ -46,10 +55,19 @@ function parse_qemu_log(log) {
                 };
 
                 i++;
+
+                if (i < lines.length && lines[i].trim().startsWith("Triple fault")) {
+                    log_events.push({
+                        type: "triple_fault",
+                    });
+                    i++;
+                    break;
+                }
+
                 if (i < lines.length) {
                     const numLine = lines[i].trim();
                     const numMatch = numLine.match(
-                        /^\s*(\d+):\s+v=([0-9a-fA-F]+)\s+e=([0-9a-fA-F]+)\s+i=(\d+)\s+cpl=(\d+)\s+IP=([0-9a-fA-F]+):([0-9a-fA-F]+)\s+pc=([0-9a-fA-F]+)\s+SP=([0-9a-fA-F]+):([0-9a-fA-F]+)\s+CR2=([0-9a-fA-F]+)/,
+                        /^\s*(\d+):\s+v=([0-9a-fA-F]+)\s+e=([0-9a-fA-F]+)\s+i=(\d+)\s+cpl=(\d+)\s+IP=([0-9a-fA-F]+):([0-9a-fA-F]+)\s+pc=([0-9a-fA-F]+)\s+SP=([0-9a-fA-F]+):([0-9a-fA-F]+)\s+/,
                     );
                     if (numMatch) {
                         event.sequence = parseInt(numMatch[1]);
@@ -62,7 +80,6 @@ function parse_qemu_log(log) {
                         event.pc = numMatch[8];
                         event.sp_segment = numMatch[9];
                         event.sp_offset = numMatch[10];
-                        event.cr2 = numMatch[11];
                     }
                 }
 
@@ -524,6 +541,7 @@ function processLog(logContent) {
 function updateSummary() {
     const exceptions = allEvents.filter((e) => e.type === "exception").length;
     const cpuResets = allEvents.filter((e) => e.type === "cpu_reset").length;
+    const tripleFaults = allEvents.filter((e) => e.type === "triple_fault").length;
 
     document.querySelector("#total-events .summary-value").textContent =
         allEvents.length;
@@ -531,6 +549,12 @@ function updateSummary() {
         exceptions;
     document.querySelector("#cpu-resets-count .summary-value").textContent =
         cpuResets;
+
+    // Update triple faults count if element exists
+    const tripleFaultEl = document.querySelector("#triple-faults-count .summary-value");
+    if (tripleFaultEl) {
+        tripleFaultEl.textContent = tripleFaults;
+    }
 }
 
 function handleFilterChange(event) {
@@ -581,6 +605,9 @@ function createEventCard(event, index) {
     } else if (event.type === "cpu_reset") {
         title = `CPU Reset (CPU ${event.cpu})`;
         info = `EIP: ${event.registers.EIP || "0x00000000"} | CR0: ${event.registers.CR0 || "0x00000000"}`;
+    } else if (event.type === "triple_fault") {
+        title = "Triple Fault";
+        info = "Fatal: System attempted to handle a double fault but failed";
     }
 
     const isSelected = selectedEventIndex === index ? "selected" : "";
@@ -607,6 +634,8 @@ function renderEventDetails(event) {
         detailsDiv.innerHTML = renderExceptionDetails(event);
     } else if (event.type === "cpu_reset") {
         detailsDiv.innerHTML = renderCpuResetDetails(event);
+    } else if (event.type === "triple_fault") {
+        detailsDiv.innerHTML = renderTripleFaultDetails(event);
     }
 }
 
@@ -754,6 +783,50 @@ function renderCpuResetDetails(event) {
     html += renderRegisters(event.registers);
 
     return html;
+}
+
+function renderTripleFaultDetails(event) {
+    return `
+        <div class="detail-group">
+            <h3>Triple Fault</h3>
+            <div class="detail-row">
+                <div class="detail-label">Event Type</div>
+                <div class="detail-value highlight" style="color: #ff4444;">Triple Fault (Fatal)</div>
+            </div>
+        </div>
+        
+        <div class="detail-group exception-explanation">
+            <h3>What This Means</h3>
+            <div class="explanation-box">
+                <div class="explanation-description">
+                    A triple fault occurs when the CPU encounters an exception while trying to handle a double fault. 
+                    This is a fatal, unrecoverable error that causes the system to reset.
+                </div>
+
+                <div class="explanation-section">
+                    <div class="explanation-title">Common Causes:</div>
+                    <ul class="explanation-list">
+                        <li>Invalid or uninitialized Interrupt Descriptor Table (IDT)</li>
+                        <li>Double fault handler is missing or invalid</li>
+                        <li>Stack overflow in the double fault handler</li>
+                        <li>Invalid Task State Segment (TSS) for double fault handler</li>
+                        <li>Page fault in double fault handler with unmapped memory</li>
+                        <li>Recursive exceptions in exception handlers</li>
+                    </ul>
+                </div>
+
+                <div class="explanation-section">
+                    <div class="explanation-title">How to Fix:</div>
+                    <div class="explanation-fix">
+                        Ensure your IDT is properly initialized with valid handlers for all exceptions, 
+                        especially the double fault handler (exception 8). Verify that exception handlers 
+                        have their own valid stack and don't cause additional exceptions. Use a dedicated 
+                        stack for the double fault handler via the IST (Interrupt Stack Table) in x86_64.
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 function renderRegisters(registers) {
